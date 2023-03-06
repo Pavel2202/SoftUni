@@ -1,9 +1,41 @@
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
+import { useAuthContext } from "../../contexts/AuthContext";
+import * as authService from "../../services/authService";
 
 const Register = () => {
+  const { register } = useAuthContext();
+  const navigate = useNavigate();
+
+  const onRegisterHandler = (e) => {
+    e.preventDefault();
+
+    let formData = new FormData(e.currentTarget);
+
+    let email = formData.get("email");
+    let password = formData.get("password");
+    let repeatPassword = formData.get("repeatPassword");
+
+    if (password != repeatPassword) {
+      console.error("Passwords don't match.");
+      return;
+    }
+
+    authService
+      .register(email, password)
+      .then((authData) => {
+        register(authData);
+        navigate("/dashboard");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <section id="registerPage">
-      <form className="registerForm">
+      <form className="registerForm" onSubmit={onRegisterHandler} method="POST">
         <img src="./images/logo.png" alt="logo" />
         <h2>Register</h2>
         <div className="on-dark">
