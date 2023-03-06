@@ -1,7 +1,40 @@
+import { useNavigate } from "react-router-dom";
+import * as petService from "../../services/petService";
+import { useAuthContext } from "../../contexts/AuthContext";
+
 const Create = () => {
+  const { user } = useAuthContext();
+  const navigate = useNavigate();
+
+  const onCreateHandler = (e) => {
+    e.preventDefault();
+    let formData = new FormData(e.currentTarget);
+
+    let name = formData.get("name");
+    let breed = formData.get("breed");
+    let age = formData.get("age");
+    let weight = formData.get("weight");
+    let image = formData.get("image");
+
+    petService
+      .create(
+        {
+          name,
+          breed,
+          age,
+          weight,
+          image,
+        },
+        user.accessToken
+      )
+      .then((res) => {
+        navigate("/dashboard");
+      });
+  };
+
   return (
     <section id="createPage">
-      <form className="createForm">
+      <form className="createForm" method="POST" onSubmit={onCreateHandler}>
         <img src="./images/cat-create.jpg" />
         <div>
           <h2>Create PetPal</h2>

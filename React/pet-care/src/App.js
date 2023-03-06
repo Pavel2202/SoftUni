@@ -25,8 +25,8 @@ function App() {
             <Route path="/logout" element={<Logout />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/create" element={<Create />} />
-            <Route path="/edit" element={<Edit />} />
-            <Route path="/details" element={<Details />} />
+            <Route path="/edit/:petId" element={<Edit />} />
+            <Route path="/details/:petId" element={<Details />} />
           </Routes>
         </main>
 
