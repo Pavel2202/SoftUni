@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Login = () => {
   return (
     <section id="loginPage">
@@ -31,7 +33,7 @@ const Login = () => {
 
         <p className="field">
           <span>
-            If you don't have profile click <a href="/register">here</a>
+            If you don't have profile click <Link to="/register">here</Link>
           </span>
         </p>
       </form>

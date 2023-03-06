@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Register = () => {
   return (
     <section id="registerPage">
@@ -40,7 +42,7 @@ const Register = () => {
 
         <p className="field">
           <span>
-            If you have profile click <a href="/login">here</a>
+            If you have profile click <Link to="/login">here</Link>
           </span>
         </p>
       </form>
