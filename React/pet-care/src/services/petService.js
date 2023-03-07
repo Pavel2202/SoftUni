@@ -35,7 +35,6 @@ export const update = async (petId, petData, token) => {
   let result = await response.json();
   return result;
 };
-//request.put(`${baseUrl}/pets/${petId}`, petData);
 
 export const remove = (petId, token) => {
   return fetch(`${baseUrl}/pets/${petId}`, {
