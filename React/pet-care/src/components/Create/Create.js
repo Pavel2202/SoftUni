@@ -2,10 +2,15 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as petService from "../../services/petService";
 import { useAuthContext } from "../../contexts/AuthContext";
+import {
+  useNotificationContext,
+  types,
+} from "../../contexts/NotificationContext";
 
 const Create = () => {
   const [errors, setErrors] = useState({ name: false });
   const { user } = useAuthContext();
+  const { addNotification } = useNotificationContext();
   const navigate = useNavigate();
 
   const onCreateHandler = (e) => {
@@ -35,6 +40,7 @@ const Create = () => {
         user.accessToken
       )
       .then((res) => {
+        addNotification("You successfully added a pet", types.success);
         navigate("/dashboard");
       });
   };

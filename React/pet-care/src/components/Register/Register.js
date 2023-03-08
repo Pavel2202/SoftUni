@@ -2,10 +2,15 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 import { useAuthContext } from "../../contexts/AuthContext";
+import {
+  useNotificationContext,
+  types,
+} from "../../contexts/NotificationContext";
 import * as authService from "../../services/authService";
 
 const Register = () => {
   const { register } = useAuthContext();
+  const { addNotification } = useNotificationContext();
   const navigate = useNavigate();
 
   const onRegisterHandler = (e) => {
@@ -26,6 +31,7 @@ const Register = () => {
       .register(email, password)
       .then((authData) => {
         register(authData);
+        addNotification("You registered successfully.", types.success);
         navigate("/dashboard");
       })
       .catch((err) => {

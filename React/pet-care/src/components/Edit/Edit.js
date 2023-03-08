@@ -1,15 +1,20 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../contexts/AuthContext";
+import {
+  useNotificationContext,
+  types,
+} from "../../contexts/NotificationContext";
 
 import * as petService from "../../services/petService";
 import usePetState from "../../hooks/usePetState";
 
 const Edit = () => {
-  const navigate = useNavigate();
   const { user } = useAuthContext();
   const { petId } = useParams();
   const [pet, setPet] = usePetState(petId);
+  const { addNotification } = useNotificationContext();
+  const navigate = useNavigate();
 
   const onEditHandler = (e) => {
     e.preventDefault();
@@ -34,6 +39,7 @@ const Edit = () => {
         user.accessToken
       )
       .then((res) => {
+        addNotification("You successfully edited pet", types.success);
         navigate("/dashboard");
       });
   };

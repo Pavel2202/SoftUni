@@ -4,13 +4,18 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import * as petService from "../../services/petService";
 import * as donationService from "../../services/donationService";
 import { useAuthContext } from "../../contexts/AuthContext";
+import {
+  useNotificationContext,
+  types,
+} from "../../contexts/NotificationContext";
 import usePetState from "../../hooks/usePetState";
 
 const Details = () => {
-  const navigate = useNavigate();
   const { user } = useAuthContext();
   const { petId } = useParams();
   const [pet, setPet] = usePetState(petId);
+  const { addNotification } = useNotificationContext();
+  const navigate = useNavigate();
 
   useEffect(() => {
     donationService.getPetDonations(petId).then((donations) => {
@@ -20,6 +25,7 @@ const Details = () => {
 
   const deleteClickHandler = () => {
     petService.remove(petId, user.accessToken).then(() => {
+      addNotification("You successfully deleted pet", types.success);
       navigate("/dashboard");
     });
   };

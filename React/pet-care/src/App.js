@@ -12,12 +12,17 @@ import Details from "./components/Details/Details";
 import Logout from "./components/Logout/Logout";
 import Error from "./components/Error/Error";
 import GuardedRoute from "./components/Common/GuardedRoute";
+import { NotificationProvider } from "./contexts/NotificationContext";
+import Notification from "./components/Common/Notification";
 
 function App() {
   return (
-      <AuthProvider>
+    <AuthProvider>
+      <NotificationProvider>
         <div id="container">
           <Header />
+
+          <Notification />
 
           <main id="content">
             <Routes>
@@ -37,7 +42,8 @@ function App() {
 
           <footer>Pet Care 2022&copy;</footer>
         </div>
-      </AuthProvider>
+      </NotificationProvider>
+    </AuthProvider>
   );
 }
 
