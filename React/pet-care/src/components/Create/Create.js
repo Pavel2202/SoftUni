@@ -1,13 +1,20 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as petService from "../../services/petService";
 import { useAuthContext } from "../../contexts/AuthContext";
 
 const Create = () => {
+  const [errors, setErrors] = useState({ name: false });
   const { user } = useAuthContext();
   const navigate = useNavigate();
 
   const onCreateHandler = (e) => {
     e.preventDefault();
+
+    if (errors.name != false) {
+      return;
+    }
+
     let formData = new FormData(e.currentTarget);
 
     let name = formData.get("name");
@@ -32,6 +39,20 @@ const Create = () => {
       });
   };
 
+  const nameChangeHandler = (e) => {
+    e.preventDefault();
+    let currentName = e.target.value;
+
+    if (currentName.length < 3) {
+      setErrors((state) => ({
+        ...state,
+        name: "Pet name should be at least 3 characters long.",
+      }));
+    } else {
+      setErrors((state) => ({ ...state, name: false }));
+    }
+  };
+
   return (
     <section id="createPage">
       <form className="createForm" method="POST" onSubmit={onCreateHandler}>
@@ -40,7 +61,14 @@ const Create = () => {
           <h2>Create PetPal</h2>
           <div className="name">
             <label htmlFor="name">Name:</label>
-            <input name="name" id="name" type="text" placeholder="Max" />
+            <input
+              name="name"
+              id="name"
+              type="text"
+              placeholder="Max"
+              onChange={nameChangeHandler}
+            />
+            <p style={{ color: "red" }}>{errors.name}</p>
           </div>
           <div className="breed">
             <label htmlFor="breed">Breed:</label>
