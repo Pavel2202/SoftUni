@@ -85,7 +85,7 @@ const Edit = () => {
               defaultValue={pet.image}
             />
           </div>
-          <button className="btn" type="submit">
+          <button className="editBtn" type="submit">
             Edit Pet
           </button>
         </div>

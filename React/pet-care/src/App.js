@@ -14,6 +14,7 @@ import Error from "./components/Error/Error";
 import GuardedRoute from "./components/Common/GuardedRoute";
 import { NotificationProvider } from "./contexts/NotificationContext";
 import Notification from "./components/Common/Notification";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (

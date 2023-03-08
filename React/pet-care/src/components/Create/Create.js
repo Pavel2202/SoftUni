@@ -102,7 +102,7 @@ const Create = () => {
               placeholder="./image/dog.jpeg"
             />
           </div>
-          <button className="btn" type="submit">
+          <button className="createBtn" type="submit">
             Create Pet
           </button>
         </div>

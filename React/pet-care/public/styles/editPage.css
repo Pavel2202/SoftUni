@@ -32,7 +32,9 @@
   margin-top: 0px;
 }
 
-.editForm .btn {
+.editForm .editBtn {
   width: 200px;
   margin-left: 55px;
+  border-radius: 8px;
+  margin-top: 10px;
 }

@@ -32,7 +32,9 @@
   margin-top: 0px;
 }
 
-.createForm .btn {
+.createForm .createBtn {
   width: 200px;
   margin-left: 55px;
+  border-radius: 8px;
+  margin-top: 10px;
 }
