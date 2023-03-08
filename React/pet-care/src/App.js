@@ -10,6 +10,7 @@ import Create from "./components/Create/Create";
 import Edit from "./components/Edit/Edit";
 import Details from "./components/Details/Details";
 import Logout from "./components/Logout/Logout";
+import GuardedRoute from "./components/Common/GuardedRoute";
 
 function App() {
   return (
@@ -24,9 +25,11 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/logout" element={<Logout />} />
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/create" element={<Create />} />
-            <Route path="/edit/:petId" element={<Edit />} />
             <Route path="/details/:petId" element={<Details />} />
+            <Route element={<GuardedRoute />}>
+              <Route path="/create" element={<Create />} />
+              <Route path="/edit/:petId" element={<Edit />} />
+            </Route>
           </Routes>
         </main>
 
