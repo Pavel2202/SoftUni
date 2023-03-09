@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import Create from "./components/Create/Create";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Details from "./components/Details/Details";
+import Edit from "./components/Edit/Edit";
 
 import Header from "./components/Header/Header";
 import Home from "./components/Home/Home";
@@ -20,6 +21,7 @@ function App() {
         <Route path="/login" element={<Login />}></Route>
         <Route path="/create" element={<Create />}></Route>
         <Route path="/details/:id" element={<Details />}></Route>
+        <Route path="/edit/:id" element={<Edit />}></Route>
       </Routes>
 
       <footer>
