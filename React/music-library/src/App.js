@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import Create from "./components/Create/Create";
 import Dashboard from "./components/Dashboard/Dashboard";
 
 import Header from "./components/Header/Header";
@@ -16,6 +17,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />}></Route>
         <Route path="/register" element={<Register />}></Route>
         <Route path="/login" element={<Login />}></Route>
+        <Route path="/create" element={<Create />}></Route>
       </Routes>
 
       <footer>
