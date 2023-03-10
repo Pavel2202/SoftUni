@@ -1,9 +1,45 @@
+import { useAuthContext } from "../../contexts/AuthContext";
+import * as musicService from "../../services/musicService";
+import { useNavigate } from "react-router-dom";
+
 const Create = () => {
+  const { user } = useAuthContext();
+  const navigate = useNavigate();
+
+  const onCreateHandler = (e) => {
+    e.preventDefault();
+
+    let formData = new FormData(e.currentTarget);
+
+    const singer = formData.get("singer");
+    const album = formData.get("album");
+    const imageUrl = formData.get("imageUrl");
+    const release = formData.get("release");
+    const label = formData.get("label");
+    const sales = formData.get("sales");
+
+    musicService
+      .createMusic(
+        {
+          singer,
+          album,
+          imageUrl,
+          release,
+          label,
+          sales,
+        },
+        user.accessToken
+      )
+      .then((res) => {
+        navigate("/dashboard");
+      });
+  };
+
   return (
     <section id="create">
       <div className="form">
         <h2>Add Album</h2>
-        <form className="create-form">
+        <form className="create-form" method="POST" onSubmit={onCreateHandler}>
           <input
             type="text"
             name="singer"
