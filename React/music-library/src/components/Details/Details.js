@@ -16,6 +16,27 @@ const Details = () => {
     });
   };
 
+  const ownerButtons = (
+    <>
+      <Link to={`/edit/${music._id}`} id="edit-btn">
+        Edit
+      </Link>
+      <Link
+        to={`/delete/${music._id}`}
+        id="delete-btn"
+        onClick={onDeleteHandler}
+      >
+        Delete
+      </Link>
+    </>
+  );
+
+  const userButtons = (
+    <Link to={`/like/${music._id}`} id="like-btn">
+      Like
+    </Link>
+  );
+
   return (
     <section id="details">
       <div id="details-wrapper">
@@ -48,21 +69,8 @@ const Details = () => {
         <div id="likes">
           Likes: <span id="likes-count">{music.likes}</span>
         </div>
-
         <div id="action-buttons">
-          <Link to={`/like/${music._id}`} id="like-btn">
-            Like
-          </Link>
-          <Link to={`/edit/${music._id}`} id="edit-btn">
-            Edit
-          </Link>
-          <Link
-            to={`/delete/${music._id}`}
-            id="delete-btn"
-            onClick={onDeleteHandler}
-          >
-            Delete
-          </Link>
+          {user._id == music._ownerId ? ownerButtons : userButtons}
         </div>
       </div>
     </section>

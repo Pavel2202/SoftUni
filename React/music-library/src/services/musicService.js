@@ -28,6 +28,20 @@ export const createMusic = async (musicData, token) => {
   return result;
 };
 
+export const update = async (musicId, musicData, token) => {
+  let response = await fetch(`${baseUrl}/albums/${musicId}`, {
+    method: "PUT",
+    headers: {
+      "content-type": "application/json",
+      "X-Authorization": token,
+    },
+    body: JSON.stringify({ ...musicData }),
+  });
+
+  let result = await response.json();
+  return result;
+};
+
 export const remove = async (musicId, token) => {
   let response = await fetch(`${baseUrl}/albums/${musicId}`, {
     method: "DELETE",
