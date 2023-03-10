@@ -1,47 +1,56 @@
-import { Link } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import useMusicState from "../../hooks/useMusicState";
+
+import * as musicService from "../../services/musicService";
+import { useAuthContext } from "../../contexts/AuthContext";
 
 const Details = () => {
+  const { user } = useAuthContext();
+  const { musicId } = useParams();
+  const [music, setMusic] = useMusicState(musicId);
+  const navigate = useNavigate();
+
   return (
     <section id="details">
       <div id="details-wrapper">
         <p id="details-title">Album Details</p>
         <div id="img-wrapper">
-          <img src="./images/BackinBlack.jpeg" alt="example1" />
+          <img src={music.imageUrl} alt="example1" />
         </div>
         <div id="info-wrapper">
           <p>
             <strong>Band:</strong>
-            <span id="details-singer">AC/DC</span>
+            <span id="details-singer">{music.singer}</span>
           </p>
           <p>
             <strong>Album name:</strong>
-            <span id="details-album">Back in Black</span>
+            <span id="details-album">{music.album}</span>
           </p>
           <p>
             <strong>Release date:</strong>
-            <span id="details-release">1980</span>
+            <span id="details-release">{music.release}</span>
           </p>
           <p>
             <strong>Label:</strong>
-            <span id="details-label">Epic</span>
+            <span id="details-label">{music.label}</span>
           </p>
           <p>
             <strong>Sales:</strong>
-            <span id="details-sales">26 million (50 million claimed)</span>
+            <span id="details-sales">{music.sales}</span>
           </p>
         </div>
         <div id="likes">
-          Likes: <span id="likes-count">0</span>
+          Likes: <span id="likes-count">{music.likes}</span>
         </div>
 
         <div id="action-buttons">
-          <Link to="" id="like-btn">
+          <Link to={`/like/${music._id}`} id="like-btn">
             Like
           </Link>
-          <Link to="" id="edit-btn">
+          <Link to={`/delete/${music._id}`} id="edit-btn">
             Edit
           </Link>
-          <Link to="" id="delete-btn">
+          <Link to={`/edit/${music._id}`} id="delete-btn">
             Delete
           </Link>
         </div>

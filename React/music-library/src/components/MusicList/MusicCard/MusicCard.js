@@ -14,11 +14,9 @@ const MusicCard = ({ music }) => {
       </p>
       <p>
         <strong>Sales:</strong>
-        <span className="sales">
-          {music.sales}
-        </span>
+        <span className="sales">{music.sales}</span>
       </p>
-      <Link className="details-btn" to={`details/${music._id}`}>
+      <Link className="details-btn" to={`/details/${music._id}`}>
         Details
       </Link>
     </li>

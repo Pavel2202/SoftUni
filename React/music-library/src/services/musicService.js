@@ -7,6 +7,13 @@ export const getAll = async () => {
   return result;
 };
 
+export const getOne = async (musicId) => {
+  let response = await fetch(`${baseUrl}/albums/${musicId}`);
+  let result = await response.json();
+
+  return result;
+};
+
 export const createMusic = async (musicData, token) => {
   let response = await fetch(`${baseUrl}/albums`, {
     method: "POST",
@@ -14,7 +21,7 @@ export const createMusic = async (musicData, token) => {
       "content-type": "application/json",
       "X-Authorization": token,
     },
-    body: JSON.stringify({ ...musicData, likes: [] }),
+    body: JSON.stringify({ ...musicData, likes: 0 }),
   });
 
   let result = await response.json();
