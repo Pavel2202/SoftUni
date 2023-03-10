@@ -27,3 +27,15 @@ export const createMusic = async (musicData, token) => {
   let result = await response.json();
   return result;
 };
+
+export const remove = async (musicId, token) => {
+  let response = await fetch(`${baseUrl}/albums/${musicId}`, {
+    method: "DELETE",
+    headers: {
+      "X-Authorization": token,
+    },
+  });
+
+  let result = await response.json();
+  return result;
+};

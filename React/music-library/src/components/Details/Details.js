@@ -10,6 +10,12 @@ const Details = () => {
   const [music, setMusic] = useMusicState(musicId);
   const navigate = useNavigate();
 
+  const onDeleteHandler = () => {
+    musicService.remove(musicId, user.accessToken).then(() => {
+      navigate("/dashboard");
+    });
+  };
+
   return (
     <section id="details">
       <div id="details-wrapper">
@@ -47,10 +53,14 @@ const Details = () => {
           <Link to={`/like/${music._id}`} id="like-btn">
             Like
           </Link>
-          <Link to={`/delete/${music._id}`} id="edit-btn">
+          <Link to={`/edit/${music._id}`} id="edit-btn">
             Edit
           </Link>
-          <Link to={`/edit/${music._id}`} id="delete-btn">
+          <Link
+            to={`/delete/${music._id}`}
+            id="delete-btn"
+            onClick={onDeleteHandler}
+          >
             Delete
           </Link>
         </div>
